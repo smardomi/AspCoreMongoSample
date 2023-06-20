@@ -1,0 +1,58 @@
+name: dockercompose11777450916585915919
+services:
+  aspcoremongosample:
+    build:
+      context: D:\Mardomi\Projects\AspCoreMongoSample
+      dockerfile: AspCoreMongoSample/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: aspcoremongosample
+    networks:
+      aspcoremongo: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "8085"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "8086"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\saeedmardomi\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\saeedmardomi\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+  mongodb:
+    command:
+    - --auth
+    image: mongo:latest
+    networks:
+      aspcoremongo: null
+    ports:
+    - mode: ingress
+      target: 27017
+      published: "27017"
+      protocol: tcp
+    restart: always
+    volumes:
+    - type: volume
+      source: dbdata6
+      target: /data/db
+      volume: {}
+networks:
+  aspcoremongo:
+    name: dockercompose11777450916585915919_aspcoremongo
+    driver: bridge
+volumes:
+  dbdata6:
+    name: dockercompose11777450916585915919_dbdata6

@@ -1,0 +1,12 @@
+name: dockercompose11777450916585915919
+services:
+  aspcoremongosample:
+    build:
+      context: D:\Mardomi\Projects\AspCoreMongoSample
+      dockerfile: AspCoreMongoSample/Dockerfile
+    image: aspcoremongosample
+    networks:
+      default: null
+networks:
+  default:
+    name: dockercompose11777450916585915919_default

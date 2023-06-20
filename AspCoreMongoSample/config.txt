@@ -1,0 +1,17 @@
+docker pull mongo:latest
+
+docker run -d -p 27017:27017 --name mongodb mongo
+
+---------------------------------------------------------------
+
+docker exec -it containername mongosh
+
+show dbs
+use admin
+db.createUser({user: "admin",pwd:"Ss#123456",roles:[{role:"userAdminAnyDatabase",db: "admin"},"readWriteAnyDatabase"]})
+
+---------------------------------------------------------------
+
+docker run --name my-mongo -d -p 27017:27017 -v /my/own/datadir:/data/db mongo:latest --auth
+
+-----------------------------------------------------------------------------------------------------------
